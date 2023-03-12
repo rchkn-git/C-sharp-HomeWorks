@@ -50,3 +50,16 @@ else
 }
 */
 
+/* Задание 4
+Console.WriteLine("Введите число: ");
+int a = int.Parse(Console.ReadLine()!);
+int mnozhitel = a / 2;
+int rez = 0;
+int i = 1;
+while (i <= mnozhitel)
+{
+    rez = 2 * i;
+    Console.Write(rez + " ");
+    i++;
+}
+*/
