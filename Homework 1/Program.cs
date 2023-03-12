@@ -36,3 +36,17 @@ else
 }
 */
 
+/* Задание 3
+Console.WriteLine("Введите число для проверки на чётность: ");
+int a = int.Parse(Console.ReadLine()!);
+int res = a % 2;
+if (res == 0)
+{
+    Console.WriteLine("Число чётное");
+}
+else
+{
+    Console.WriteLine("Число нечётное");
+}
+*/
+
