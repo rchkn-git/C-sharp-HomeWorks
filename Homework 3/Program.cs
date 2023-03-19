@@ -12,9 +12,10 @@ int ReadInt(string text)
 
 
 //Задача 19
-/*
+
 string a = ReadStr("Введите число: ");
 int len = a.Length;
+
 void CheckPoliandrom (string x)
 {
     int b = 0;
@@ -34,8 +35,15 @@ void CheckPoliandrom (string x)
         Console.WriteLine("Число является палиндромом");
     }
 }
-CheckPoliandrom(a);
-
+if(len != 5)
+{
+    Console.WriteLine("Вы ввели не пятизначное число");
+}
+else
+{
+    CheckPoliandrom(a);
+}
+/*
 //Задача 23
 int[] a = new int[3];
 int[] b = new int[3];
