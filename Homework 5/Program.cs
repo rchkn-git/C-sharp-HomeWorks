@@ -65,6 +65,7 @@ double[] GetRandomDoubleArray(int size, int minValue, int maxValue)
     return resultR;
 }
 
+// задача 3
 double findResBehindMinMax(double[] arr)
 {
     double min = arr[0];
