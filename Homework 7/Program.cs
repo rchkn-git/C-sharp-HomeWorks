@@ -9,6 +9,7 @@ int columns = int.Parse(Console.ReadLine()!);
 double[,] array = GetDoubleArray(rows,columns, 0, 10);
 PrintArray(array);
 
+//Заполняем вещественными числами для 47 задачи
 double[,] GetDoubleArray(int m, int n, int minValue, int maxValue)
 {
     double[,] res = new double[m,n];
@@ -23,6 +24,7 @@ double[,] GetDoubleArray(int m, int n, int minValue, int maxValue)
     return res;
 }
 
+//Печать вещественного массива для 47 задачи
 void PrintArray(double[,] array)
 {
     for(int i = 0; i < array.GetLength(0); i++)
@@ -51,6 +53,7 @@ Console.WriteLine();
 PrintArray(array);
 */
 
+// Получаем массив, заполненный рандомными числами, используется для всех задач
 int[,] GetArray(int m, int n, int minValue, int maxValue)
 {
     int[,] res = new int[m,n];
@@ -64,7 +67,10 @@ int[,] GetArray(int m, int n, int minValue, int maxValue)
     }
     return res;
 }
+
 /*
+
+//Проверяем, есть ли заданный строком и столбцом элемент в массиве
 string checkLen(int[,] arr, int m, int n)
 {
     string res;
@@ -80,12 +86,14 @@ string checkLen(int[,] arr, int m, int n)
     return res;
 }
 
+//Возвращаем сам элемент
 int checkArr(int[,] arr, int m, int n)
 {
     return (arr[m, n]);
 }
 */
 
+//Печатаем двумерный интовый массив
 void PrintArray(int[,] array)
 {
     for(int i = 0; i < array.GetLength(0); i++)
@@ -105,6 +113,7 @@ int[,] array = GetArray(rows, columns, 0, 10);
 Console.Write($"[{String.Join(", ", GetAverage(array))}]");
 PrintArray(array);
 
+//Ищем среднее арифметическое
 double[] GetAverage(int[,] arr)
 {
     double[] Average = new double[arr.GetLength(0)];
