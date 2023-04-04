@@ -1,11 +1,16 @@
 ﻿
 
-
+//для 54 и 57 задач
 Console.Write("Введите количество строк: ");
 int rows = int.Parse(Console.ReadLine()!);
 
 Console.Write("Введите количество столбцов: ");
 int columns = int.Parse(Console.ReadLine()!);
+//для 57, чтобы словарь был не оч большим и элементы чаще повторялись
+int[,] array = GetArray(rows, columns, 0, 9);
+PrintArray(array);
+Console.WriteLine();
+PrintArray(getVocabularyAndCount(array));
 
 
 //Задача 54
@@ -69,6 +74,59 @@ int[] Sort(int[] arr)
     return arr;
 }
 */
+
+//Задача 57
+int[,] getVocabularyAndCount(int[,] arr)
+{
+    int[,] Vocabulary = new int[1,2];
+    for(int i = 0; i < arr.GetLength(0); i++)
+    {
+        for(int j = 0; j < arr.GetLength(1); j++)
+        {
+            Vocabulary = checkVocabulary(arr, Vocabulary, i, j);
+        }
+    }
+    return Vocabulary;
+}
+
+int[,] checkVocabulary(int[,] arr, int[,] arrVocab, int x, int z)
+{
+    for(int i = 0; i < arrVocab.GetLength(0); i++)
+    {
+        if(arr[x, z] == arrVocab[i, 0])
+        {
+            arrVocab[i, 1] += 1;
+        }
+        else
+        {
+            int[,] buffVocab = new int [arrVocab.GetLength(0), arrVocab.GetLength(1)];
+            for(int j = 0; j < arrVocab.GetLength(0); j++)
+            {
+                for(int k = 0; k < arrVocab.GetLength(0); k++)
+                {
+                    buffVocab[j, k] = arrVocab[j, k];
+                }
+            }
+            int[,] arrVocab = new int[buffVocab.GetLength(0) + 1, buffVocab.GetLength(1)];
+            for(int l = 0; l < arrVocab.GetLength(0); l++)
+            {
+                if(l == arrVocab.GetLength(0) -1)
+                {
+                    arrVocab[GetLength(0) - 1, 1] = 1;
+                }
+                else
+                {
+                    for(int m = 0; m < arrVocab.GetLength(0); m++)
+                    {
+                        arrVocab[l, m] = buffVocab[l, m];
+                    }
+                }
+            }
+        }
+    }
+    return arrVocab;
+}
+
 /*
 //Задача 58
 Console.Write("Введите количество строк первой матрицы: ");
@@ -97,7 +155,7 @@ PrintArray(CompositionArr(arrayA, arrayB));
 // Получаем массив, заполненный рандомными числами, используется для всех задач
 int[,] GetArray(int m, int n, int minValue, int maxValue)
 {
-    int[,] res = new int[m,n];
+    int[,] res = new int[m, n];
 
     for (int i = 0; i < m; i++)
     {
@@ -123,7 +181,7 @@ void PrintArray(int[,] array)
 }
 
 /*
-//Создаём результирующий массив
+//Создаём результирующий массив для задачи 58
 int[,] CompositionArr(int[,] arrA, int[,] arrB)
 {
     int[,] ComposArr = new int [arrA.GetLength(0), arrB.GetLength(1)];
@@ -140,7 +198,7 @@ int[,] CompositionArr(int[,] arrA, int[,] arrB)
     return ComposArr;
 }
 
-//Считаем произведения для результирующего массива
+//Считаем произведения для результирующего массива для задачи 58
 int getComposition(int[,] arrA, int[,] arrB, int i, int j)
 {
     int res = 0;
