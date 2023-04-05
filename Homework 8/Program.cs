@@ -6,11 +6,6 @@ int rows = int.Parse(Console.ReadLine()!);
 
 Console.Write("Введите количество столбцов: ");
 int columns = int.Parse(Console.ReadLine()!);
-//для 57, чтобы словарь был не оч большим и элементы чаще повторялись
-int[,] array = GetArray(rows, columns, 0, 9);
-PrintArray(array);
-Console.WriteLine();
-PrintArray(getVocabularyAndCount(array));
 
 
 //Задача 54
@@ -76,55 +71,88 @@ int[] Sort(int[] arr)
 */
 
 //Задача 57
-int[,] getVocabularyAndCount(int[,] arr)
+int[,] array = GetArray(rows, columns, 0, 9);
+int[] Vocabulary = new int[0];
+Vocabulary = getVocabulary(array);
+PrintArray(array);
+Console.WriteLine();
+int[,] VocabAndCount = new int[Vocabulary.Length, 2];
+VocabAndCount = makeVocabAndCount(Vocabulary);
+
+
+PrintVocabularyAndCount(countNumsInVocabulary(array, VocabAndCount));
+
+
+int[] getVocabulary(int[,] arr)
 {
-    int[,] Vocabulary = new int[1,2];
+    int checkNumber = 0;
     for(int i = 0; i < arr.GetLength(0); i++)
     {
         for(int j = 0; j < arr.GetLength(1); j++)
         {
-            Vocabulary = checkVocabulary(arr, Vocabulary, i, j);
+            checkNumber++;
+            Vocabulary = buildVocab(arr, Vocabulary, i, j, checkNumber);
         }
     }
     return Vocabulary;
 }
 
-int[,] checkVocabulary(int[,] arr, int[,] arrVocab, int x, int z)
+int[] buildVocab(int[,] arr, int[] Vocab, int m, int n, int num)
 {
-    for(int i = 0; i < arrVocab.GetLength(0); i++)
+    int isInCheckArray = 0;
+    if(num == 1)
     {
-        if(arr[x, z] == arrVocab[i, 0])
+        Array.Resize(ref Vocab, 1);
+        Vocab[0] = arr[m,n];
+    }
+    for(int i = 0; i < Vocab.Length; i++)
+    {
+        if(Vocab[i] == arr[m, n])
+        isInCheckArray++;
+    }
+    if(isInCheckArray == 0)
+    {
+        Array.Resize(ref Vocab, Vocab.Length + 1);
+        Vocab[Vocab.Length - 1] = arr[m, n];
+    }
+    return Vocab;
+}
+
+int[,] makeVocabAndCount(int[] vocab)
+{
+    for(int i = 0; i < vocab.Length; i++)
+    {
+        VocabAndCount[i, 0] = vocab[i];
+    }
+    return VocabAndCount;
+}
+
+int[,] countNumsInVocabulary(int[,] arr, int[,] res)
+{
+    for(int i = 0; i < arr.GetLength(0); i++)
+    {
+        for(int j = 0; j < arr.GetLength(1); j++)
         {
-            arrVocab[i, 1] += 1;
-        }
-        else
-        {
-            int[,] buffVocab = new int [arrVocab.GetLength(0), arrVocab.GetLength(1)];
-            for(int j = 0; j < arrVocab.GetLength(0); j++)
+            for(int k = 0; k < res.GetLength(0); k++)
             {
-                for(int k = 0; k < arrVocab.GetLength(0); k++)
+                if(res[k, 0] == arr[i, j])
                 {
-                    buffVocab[j, k] = arrVocab[j, k];
-                }
-            }
-            int[,] arrVocab = new int[buffVocab.GetLength(0) + 1, buffVocab.GetLength(1)];
-            for(int l = 0; l < arrVocab.GetLength(0); l++)
-            {
-                if(l == arrVocab.GetLength(0) -1)
-                {
-                    arrVocab[GetLength(0) - 1, 1] = 1;
-                }
-                else
-                {
-                    for(int m = 0; m < arrVocab.GetLength(0); m++)
-                    {
-                        arrVocab[l, m] = buffVocab[l, m];
-                    }
+                    res[k, 1] += 1;
                 }
             }
         }
     }
-    return arrVocab;
+    return res;
+}
+
+void PrintVocabularyAndCount(int[,] vocab)
+{
+    for(int i = 0; i < vocab.GetLength(0); i++)
+    {
+        Console.Write($"{vocab[i,0]} встречается ");
+        Console.Write($"{vocab[i,1]} раз");
+        Console.WriteLine();
+    }
 }
 
 /*
