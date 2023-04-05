@@ -157,7 +157,7 @@ void PrintVocabularyAndCount(int[,] vocab)
 */
 
 
-
+/*
 //Задача 58
 Console.Write("Введите количество строк первой матрицы: ");
 int rowsA = int.Parse(Console.ReadLine()!);
@@ -204,6 +204,8 @@ int[,] CompositionArr(int[,] arrA, int[,] arrB)
     
 }
 
+
+
 //Считаем произведения для результирующего массива для задачи 58
 int getComposition(int[,] arrA, int[,] arrB, int i, int j)
 {
@@ -214,7 +216,41 @@ int getComposition(int[,] arrA, int[,] arrB, int i, int j)
     }
     return res;
 }
+*/
 
+//Задача 60
+//Тут не стал прописывать метод, т.к. у нас жёстко заданы параметры массива
+int[,,] res = new int[2, 2, 2];
+
+    for (int i = 0; i < res.GetLength(0); i++)
+    {
+        for(int j = 0; j < res.GetLength(1); j++)
+        {
+            for(int k = 0; k < res.GetLength(2); k++)
+            {
+                res[i, j, k] = new Random().Next(-9, 10);
+            }
+        }
+    }
+
+Print3DArray(res);
+
+
+void Print3DArray(int[,,] array)
+{
+    for(int i = 0; i < array.GetLength(0); i++)
+    {
+        for(int j = 0; j < array.GetLength(1); j++)
+        {
+            for(int k = 0; k < res.GetLength(2); k++)
+            {
+                Console.Write($"{array[i,j,k]}  {i},{j},{k}    ");
+            }
+            Console.WriteLine();
+        }
+        Console.WriteLine();
+    }
+}
 
 // Получаем массив, заполненный рандомными числами, используется для всех задач
 int[,] GetArray(int m, int n, int minValue, int maxValue)
