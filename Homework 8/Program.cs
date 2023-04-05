@@ -1,6 +1,6 @@
 ﻿
-
-//для 54 и 57 задач
+/*
+//Задача 54
 Console.Write("Введите количество строк: ");
 int rows = int.Parse(Console.ReadLine()!);
 
@@ -8,8 +8,8 @@ Console.Write("Введите количество столбцов: ");
 int columns = int.Parse(Console.ReadLine()!);
 
 
-//Задача 54
-/*int[,] array = GetArray(rows, columns, -9, 9);
+
+int[,] array = GetArray(rows, columns, -9, 9);
 PrintArray(array);
 Console.WriteLine();
 PrintArray(GetSortedArray(array));
@@ -69,7 +69,7 @@ int[] Sort(int[] arr)
     return arr;
 }
 */
-
+/*
 //Задача 57
 int[,] array = GetArray(rows, columns, 0, 9);
 int[] Vocabulary = new int[0];
@@ -154,8 +154,10 @@ void PrintVocabularyAndCount(int[,] vocab)
         Console.WriteLine();
     }
 }
+*/
 
-/*
+
+
 //Задача 58
 Console.Write("Введите количество строк первой матрицы: ");
 int rowsA = int.Parse(Console.ReadLine()!);
@@ -178,7 +180,41 @@ Console.WriteLine();
 PrintArray(arrayB);
 Console.WriteLine();
 PrintArray(CompositionArr(arrayA, arrayB));
-*/
+
+//Создаём результирующий массив для задачи 58
+int[,] CompositionArr(int[,] arrA, int[,] arrB)
+{
+    int[,] ComposArr = new int [arrA.GetLength(0), arrB.GetLength(1)];
+    if(arrA.GetLength(1) == arrB.GetLength(0))
+    {
+        for(int i = 0; i < ComposArr.GetLength(0); i++)
+        {
+            for(int j = 0; j < ComposArr.GetLength(1); j++)
+            {
+                ComposArr[i, j] = getComposition(arrayA, arrayB, i, j);
+            }
+        }
+        return ComposArr;
+    }
+    else
+    {
+        Console.WriteLine("Количество столбцов у первой матрицы должно совпадать с количеством строк у второй матрицы!");
+        return ComposArr;
+    }
+    
+}
+
+//Считаем произведения для результирующего массива для задачи 58
+int getComposition(int[,] arrA, int[,] arrB, int i, int j)
+{
+    int res = 0;
+    for(int k = 0; k < arrA.GetLength(1); k++)
+    {
+        res = res + arrA[i, k] * arrB[k, j];
+    }
+    return res;
+}
+
 
 // Получаем массив, заполненный рандомными числами, используется для всех задач
 int[,] GetArray(int m, int n, int minValue, int maxValue)
@@ -207,35 +243,3 @@ void PrintArray(int[,] array)
         Console.WriteLine();
     }
 }
-
-/*
-//Создаём результирующий массив для задачи 58
-int[,] CompositionArr(int[,] arrA, int[,] arrB)
-{
-    int[,] ComposArr = new int [arrA.GetLength(0), arrB.GetLength(1)];
-    if(arrA.GetLength(1) == arrB.GetLength(0))
-    {
-        for(int i = 0; i < ComposArr.GetLength(0); i++)
-        {
-            for(int j = 0; j < ComposArr.GetLength(1); j++)
-            {
-                ComposArr[i, j] = getComposition(arrayA, arrayB, i, j);
-            }
-        }
-    }
-    return ComposArr;
-}
-
-//Считаем произведения для результирующего массива для задачи 58
-int getComposition(int[,] arrA, int[,] arrB, int i, int j)
-{
-    int res = 0;
-    for(int k = 0; k < arrA.GetLength(1); k++)
-    {
-        res = res + arrA[i, k] * arrB[k, j];
-    }
-    return res;
-}
-*/
-
-//
