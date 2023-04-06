@@ -223,7 +223,6 @@ int getComposition(int[,] arrA, int[,] arrB, int i, int j)
 */
 
 //Задача 60
-//Тут не стал прописывать метод, т.к. у нас жёстко заданы параметры массива
 int[,,] res = new int [2, 2, 2];
 int[] Vocabulary = new int[0];
 res = Get3DArray(res);
@@ -312,6 +311,7 @@ void Print3DArray(int[,,] array)
         Console.WriteLine();
     }
 }
+
 
 
 
