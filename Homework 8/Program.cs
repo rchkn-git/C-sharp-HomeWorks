@@ -82,7 +82,7 @@ VocabAndCount = makeVocabAndCount(Vocabulary);
 
 PrintVocabularyAndCount(countNumsInVocabulary(array, VocabAndCount));
 
-
+// Пробегаемся по массиву для создания словаря
 int[] getVocabulary(int[,] arr)
 {
     int checkNumber = 0;
@@ -97,6 +97,7 @@ int[] getVocabulary(int[,] arr)
     return Vocabulary;
 }
 
+// Строим одномерный словарь
 int[] buildVocab(int[,] arr, int[] Vocab, int m, int n, int num)
 {
     int isInCheckArray = 0;
@@ -118,6 +119,7 @@ int[] buildVocab(int[,] arr, int[] Vocab, int m, int n, int num)
     return Vocab;
 }
 
+// Делаем массив двумерным
 int[,] makeVocabAndCount(int[] vocab)
 {
     for(int i = 0; i < vocab.Length; i++)
@@ -127,6 +129,7 @@ int[,] makeVocabAndCount(int[] vocab)
     return VocabAndCount;
 }
 
+// Подсчитываем, сколько раз значение из словаря встречается в массиве
 int[,] countNumsInVocabulary(int[,] arr, int[,] res)
 {
     for(int i = 0; i < arr.GetLength(0); i++)
@@ -145,6 +148,7 @@ int[,] countNumsInVocabulary(int[,] arr, int[,] res)
     return res;
 }
 
+//Печатаем
 void PrintVocabularyAndCount(int[,] vocab)
 {
     for(int i = 0; i < vocab.GetLength(0); i++)
@@ -220,22 +224,79 @@ int getComposition(int[,] arrA, int[,] arrB, int i, int j)
 
 //Задача 60
 //Тут не стал прописывать метод, т.к. у нас жёстко заданы параметры массива
-int[,,] res = new int[2, 2, 2];
+int[,,] res = new int [2, 2, 2];
+int[] Vocabulary = new int[0];
+res = Get3DArray(res);
 
+// Генерируем трёхмерный массив
+int[,,] Get3DArray(int[,,] res)
+{
+    int num = 0;
     for (int i = 0; i < res.GetLength(0); i++)
     {
         for(int j = 0; j < res.GetLength(1); j++)
         {
             for(int k = 0; k < res.GetLength(2); k++)
-            {
+            {   
+                num++;
                 res[i, j, k] = new Random().Next(-9, 10);
+                Vocabulary = buildVocab(res, Vocabulary, i, j, k, num);
             }
         }
     }
+    return res;
+}
 
-Print3DArray(res);
+// Строим одномерный словарь... (Да, мы это видели где-то выше)
+int[] buildVocab(int[,,] arr, int[] Vocab, int m, int n, int o, int num)
+{
+    int isInCheckArray = 0;
+    if(num == 1)
+    {
+        Array.Resize(ref Vocab, 1);
+        Vocab[0] = arr[m,n,o];
+    }
+    for(int i = 0; i < Vocab.Length; i++)
+    {
+        if(Vocab[i] == arr[m, n, o])
+        isInCheckArray++;
+    }
+    if(isInCheckArray == 0)
+    {
+        Array.Resize(ref Vocab, Vocab.Length + 1);
+        Vocab[Vocab.Length - 1] = arr[m, n, o];
+    }
+    return Vocab;
+}
 
+res = CheckRandAndChange(res, Vocabulary);
 
+// Увеличиваем рандомность массива - если число до этого уже было в массиве,
+// то мы его ещё раз прорандомим!
+int[,,] CheckRandAndChange(int[,,] arr, int[] vocabulary)
+{
+    for(int i = 0; i < arr.GetLength(0); i++)
+    {
+        for(int j = 0; j < arr.GetLength(1); j++)
+        {
+            for(int k = 0; k < arr.GetLength(2); k++)
+            {
+                for(int m = 0; m < vocabulary.Length; m++)
+                {
+                    if(vocabulary[m] == arr[i, j, k])
+                    {
+                        arr[i, j, k] = new Random().Next(-9, 10);
+                    }
+                }
+            }
+        }
+    }
+    return arr;
+}
+
+Print3DArray(Get3DArray(res));
+
+// Печатаем 3д массив
 void Print3DArray(int[,,] array)
 {
     for(int i = 0; i < array.GetLength(0); i++)
@@ -251,6 +312,8 @@ void Print3DArray(int[,,] array)
         Console.WriteLine();
     }
 }
+
+
 
 // Получаем массив, заполненный рандомными числами, используется для всех задач
 int[,] GetArray(int m, int n, int minValue, int maxValue)
@@ -279,3 +342,6 @@ void PrintArray(int[,] array)
         Console.WriteLine();
     }
 }
+
+
+// Вообще, проект великоват, да((
