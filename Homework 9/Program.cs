@@ -49,13 +49,13 @@ Console.WriteLine(Foo(M, N));
 
 int Foo(int a, int b)
 {
-    int res;
-    if (a == 0) res = b + 1; else
-
-    if (a == 1) res = b + 2; else
-
-    if (a == 2) res = 2*b + 3; else
-
-    res = (1 << (b + 3)) - 3;
-return res;
+    if (a == 0)
+        return b + 1;
+    else
+        if ((a > 0) && (b == 0))
+        return Foo(a - 1, 1);
+    else if ((a > 0) && (b > 0))
+        return Foo(a - 1, Foo(a, b - 1));
+    else 
+        return 0;
 }
